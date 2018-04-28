@@ -38,3 +38,5 @@ Participants must first answer whether their dominant hand is left or right. If 
 After explaining the task, there will be XX practice trials in which already feedback on response accuracy and speed is given. Then there are YY main trials, before a final post-test survey.
 
 Practice and main trials are exactly identical. On each trial, participants see a *pause screen* (with just "PAUSE") on the screen. By clicking either F, J or SPACE (or, alternatively, any button whatsoever), they proceed to a *"get ready" screen* with a count down, starting at 2, then after one second showing 1, then showing a fixation cross for another second in the middle of the where the display (canvas) will appear next. Reaction times are measured form the onset of the visual display. After a button response, participants go the *feedback screen* where they see whether their last answer was correct and what their reaction time was. After a button click, they go to the next round starting with a *pause screen*.
+
+Every trial (both practice and main) is a completely random choice of positive/negative, feature/conjunction condition and a total random choice of *size*.
