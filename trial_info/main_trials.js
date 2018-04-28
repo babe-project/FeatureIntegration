@@ -1,10 +1,14 @@
 var main_trials = [
-	{question: "How are you today?", 
-	 option1: "fine", 
-	 option2: "great", 
-	 picture: "images/question_mark_01.png"},
-	{question: "What is the weather like?", 
-	 option1: "shiny", 
-	 option2: "rainbow", 
-	 picture: "images/question_mark_02.png"},
+	{size: 1,
+	 trial: 'positive',
+	 condition: 'conjunction'},
+	{size: 5,
+	 trial: 'negative',
+	 condition: 'conjunction'},
+	{size: 15,
+	 trial: 'positive',
+	 condition: 'feature'},
+	{size: 30,
+	 trial: 'negative',
+	 condition: 'feature'}
 ];

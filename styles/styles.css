@@ -83,10 +83,6 @@ button:focus {
 	text-align: right;
 }
 
-.clearfix {
-	clear: both;
-}
-
 .progress-bar {
 	border: 1px solid #5187BA;
 	height: 12px;
@@ -99,20 +95,11 @@ button:focus {
 	height: 12px;
 }
 
-.stimulus-container {
-	height: 300px;
-	margin: 0 auto;
-	position: relative;
-	width: 400px;
+.clearfix {
+	clear: both;
 }
 
-.stimulus {
-	background-color: #414f6f;
-	height: 120px;
-	left: 140px;
-	position: absolute;
-	top: 90px;
-	width: 120px;
+canvas {
 }
 
 .question {

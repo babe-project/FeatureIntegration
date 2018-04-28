@@ -24,6 +24,7 @@
 		<!-- local js files -->
 		<script src="scripts/main.js"></script>
 		<script src="scripts/experiment.js"></script>
+		<script src="scripts/canvas.js"></script>
 		<script src="scripts/helpers.js"></script>
 		<script src="scripts/submit_to_server.js"></script>
 		
@@ -93,7 +94,7 @@
 			<h1>{{ title }}</h1>
 			{{/ title }}
 			<div class="picture", align = "center">
-			<img <img src={{picture}} alt="a picture" height="100" width="100">
+				<canvas id="canvas" height='400', width='650'></canvas>
 			</div>
 
 		  <p class="question">
@@ -132,7 +133,7 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="picture", align = "center">
-			<img src={{picture}} alt="a picture" height="100" width="100">
+			<canvas id="canvas" height='400', width='650'></canvas>
 		</div>
 
 		<p class="question">
