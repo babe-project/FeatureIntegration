@@ -1,6 +1,6 @@
 # Replication of Experiment I of Treisman & Gelade (1980)
 
-This implementation builds on the [minimal template](https://github.com/babe-project/MinimalTemplate) (in the version of commit d8eee9c31d42709060f7f865faceebd9ea23b2a7), using [_babe](https://babe-project.github.io/babe_site/).
+This implementation builds on the [minimal template](https://github.com/babe-project/MinimalTemplate) (in the version of commit 5be46c86f4e5b5c426282ac3319e0f80780032ef), using [_babe](https://babe-project.github.io/babe_site/).
 
 ## Cloning and running the experiment
 
