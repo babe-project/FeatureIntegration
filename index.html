@@ -81,10 +81,18 @@
 				<p class="text">{{ text }}</p>
 			</section>
 			{{/ text }}
+			<p>
+				<label for="dominant-hand">My dominant hand is:</label>
+				<select id="dominant-hand">
+					<option value="" selected disabled>-- select --</option>
+					<option value="right">right</option>
+					<option value="left">left</option>
+				</select>
+			</p>
 			{{# button }}
-			<button id="next">{{ button }}</button>
+			<button id="next" class="nodisplay">{{ button }}</button>
 			{{/ button }}
-		</view>
+		</div>
 		</script>
 
 		<!-- Practice trial view -->
@@ -93,7 +101,7 @@
 			{{# title }}
 			<h1>{{ title }}</h1>
 			{{/ title }}
-			<h3>F - present, J - absent</h3>
+			<h3>F - {{ f }}, J - {{ j }}</h3>
 			{{# description }}
 			<p>{{ description }}</p>
 			{{/ description }}
@@ -101,13 +109,6 @@
 			<div class="picture", align = "center">
 				<canvas id="canvas" height='400', width='650'></canvas>
 			</div>
-
-			<p class="answer-container">
-				<label for="yes" class="button-answer">{{option1}}</label>
-				<input type="radio" name="answer" id="yes" value={{option1}} />
-				<input type="radio" name="answer" id="no" value={{option2}} />
-				<label for="no" class="button-answer">{{option2}}</label>
-			</p>
 		</div>
 		</script>
 
@@ -126,27 +127,20 @@
 		<!-- main view (buttons response) -->
 		<script id="main-view" type="x-tmpl-mustache">
 		<div class="view">
-		<div class="progress-bar-container">
-			<p>progress</p>
-			<div class="progress-bar"><span id='filled'><span></div>
-		</div>
-		<div class="clearfix"></div>
-		<div class="picture", align = "center">
-			<canvas id="canvas" height='400', width='650'></canvas>
-		</div>
+			<div class="progress-bar-container">
+				<p>progress</p>
+				<div class="progress-bar"><span id='filled'><span></div>
+			</div>
+			<div class="clearfix"></div>
 
-		<p class="question">
-		{{# question }}
-		{{ question }}
-		{{/ question }}
-		</p>
+			<h3>F - {{ f }}, J - {{ j }}</h3>
+			{{# description }}
+			<p>{{ description }}</p>
+			{{/ description }}
 
-		<p class="answer-container">
-			<label for="yes" class="button-answer">{{ option1 }}</label>
-			<input type="radio" name="answer" id="yes" value={{ option1 }} />
-			<input type="radio" name="answer" id="no" value={{ option2 }} />
-			<label for="no" class="button-answer">{{option2}}</label>
-		</p>
+			<div class="picture", align = "center">
+				<canvas id="canvas" height='400', width='650'></canvas>
+			</div>
 
 		</div>
 		</script>

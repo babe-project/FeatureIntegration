@@ -39,17 +39,17 @@ exp.init = function(){
 }
 
 
-
 // navigation through the views and steps in each view;
 // shows each view (in the order defined in 'config_general') for
 // the given number of steps (as defined in 'config_general')
 exp.findNextView = function() {
     var currentView = this.views_seq[this.currentViewCounter];
+    console.log(currentView);
     if (this.currentTrialCounter < currentView.trials) {
         currentView.render(this.currentTrialCounter);
-		this.currentTrialCounter ++;
+        this.currentTrialCounter ++;
     } else {
-		this.currentViewCounter ++;
+        this.currentViewCounter ++;
         currentView = this.views_seq[this.currentViewCounter];
         this.currentTrialCounter = 0;
         currentView.render(this.currentTrialCounter);

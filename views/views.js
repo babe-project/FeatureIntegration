@@ -41,8 +41,21 @@ var instructions = {
             button: this.buttonText
         }));
 
+        $('#dominant-hand').on('change', function() {
+            $('#next').removeClass('nodisplay');
+        });
+
         // moves to the next view
         $('#next').on('click', function(e) {
+            exp.global_data.dominantHand = $('#dominant-hand').val();
+
+            if (exp.global_data.dominantHand === 'right') {
+                exp.global_data.j = 'present';
+                exp.global_data.f = 'absent';
+            } else  {
+                exp.global_data.f = 'present';
+                exp.global_data.j = 'absent';
+            }
             exp.findNextView();
         }); 
 
@@ -54,40 +67,77 @@ var practice = {
     "title": "Practice trial",
 
     render: function (CT) {
-
-        viewTemplate = $("#practice-view").html();
+        var viewTemplate = $("#practice-view").html();
         $('#main').html(Mustache.render(viewTemplate, {
         title: this.title,
-        description: exp.trial_info.practice_trials[CT].description,
+        description: 'letter S or a blue letter',
+        f: exp.global_data.f,
+        j: exp.global_data.j
         }));
 
         // creates the picture
         var canvas = createCanvas();
-        console.log(exp.trial_info.practice_trials[CT]);
-        canvas.draw(exp.trial_info.practice_trials[CT]);
+        var startingTime = Date.now();
+        var keyPressed, correctness;
 
-        startingTime = Date.now();
-        // attaches an event listener to the yes / no radio inputs
-        // when an input is selected a response property with a value equal to the answer is added to the trial object
-        // as well as a readingTimes property with value - a list containing the reading times of each word
-        $('input[name=answer]').on('change', function() {
-            RT = Date.now() - startingTime; // measure RT before anything else
+        canvas.draw(exp.trial_info.practice_trials[CT]);
+        console.log(exp.trial_info.practice_trials[CT]['trial']);
+
+        var handleKeyUp = function(e) {
+            if (e.which === 74) {
+                keyPressed = 'j';
+                correctness = isCorrect('j');
+                recordData();
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 70) {
+                keyPressed = 'f';
+                correctness = isCorrect('f');
+                recordData();
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else {
+                console.debug('some other key pressed');
+            }
+        };
+
+        $('body').on('keyup', handleKeyUp);
+
+        var isCorrect = function(key) {
+            var correctness;
+
+            if ((exp.trial_info.practice_trials[CT].trial === 'negative' && exp.global_data[key] === 'absent') ||
+                (exp.trial_info.practice_trials[CT].trial === 'positive' && exp.global_data[key] === 'present')) {
+                correctness = 'correct';
+            } else {
+                correctness = 'incorrect';
+            }
+
+            return correctness;
+        };
+
+        var recordData = function() {
+            var RT = Date.now() - startingTime; // measure RT before anything else
+
             trial_data = {
                 trial_type: "practice",
                 trial_number: CT+1,
-                size: exp.trial_info.practice_trials.size,
-                condition: exp.trial_info.practice_trials.condition,
-                trial: exp.trial_info.practice_trials.trial,
-                option_chosen: $('input[name=answer]:checked').val(),
+                size: exp.trial_info.practice_trials[CT].size,
+                condition: exp.trial_info.practice_trials[CT].condition,
+                trial: exp.trial_info.practice_trials[CT].trial,
+                f: exp.global_data.f,
+                j: exp.global_data.j,
+                keyPressed: keyPressed,
+                correctness: correctness,
                 RT: RT
             };
-            exp.trial_data.push(trial_data)
-            exp.findNextView();
-        });
 
+            exp.trial_data.push(trial_data);
+        };
     },
-    trials: 2
-}
+
+    trials: 4
+};
 
 var beginMainExp = {
     "text": "Now that you have acquainted yourself with the procedure of the task, the actual experiment will begin.",
@@ -109,44 +159,75 @@ var beginMainExp = {
 
 var main = {
 	
-	trials : 2,
+	trials : 4,
 	
     render : function(CT) {
-        var canvas = createCanvas();
-        canvas.draw(main_trials[CT]);
-		
 		// fill variables in view-template
         var viewTemplate = $('#main-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
-            question: exp.trial_info.main_trials[CT].question,
-            option1:  exp.trial_info.main_trials[CT].option1,
-            option2:  exp.trial_info.main_trials[CT].option2,
-            picture:  exp.trial_info.main_trials[CT].picture
+        description: 'letter S or a blue letter',
+        f: exp.global_data.f,
+        j: exp.global_data.j
         }));
 		
-		// update the progress bar
-        var filled = CT * (180 / exp.views_seq[exp.currentViewCounter].trials);
-        $('#filled').css('width', filled);
+        // creates the picture
+        var canvas = createCanvas();
+        var startingTime = Date.now();
+        var keyPressed, correctness;
 
-        // event listener for buttons; when an input is selected, the response
-		// and additional information are stored in exp.trial_info
-        $('input[name=answer]').on('change', function() {
-            RT = Date.now() - startingTime; // measure RT before anything else
+        canvas.draw(exp.trial_info.main_trials[CT]);
+
+        $('body').on('keyup', handleKeyUp);
+
+        var handleKeyUp = function(e) {
+            if (e.which === 74) {
+                keyPressed = 'j';
+                correctness = isCorrect('j');
+                recordData();
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 70) {
+                keyPressed = 'f';
+                correctness = isCorrect('f');
+                recordData();
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else {
+                console.debug('some other key pressed');
+            }
+        };
+
+        var isCorrect = function(key) {
+            var correctness;
+
+            if ((exp.trial_info.main_trials[CT].trial === 'negative' && exp.global_data[key] === 'absent') ||
+                (exp.trial_info.main_trials[CT].trial === 'positive' && exp.global_data[key] === 'present')) {
+                correctness = 'correct';
+            } else {
+                correctness = 'incorrect';
+            }
+
+            return correctness;
+        };
+
+        var recordData = function() {
+            var RT = Date.now() - startingTime; // measure RT before anything else
+
             trial_data = {
-                trial_type: "mainForcedChoice",
+                trial_type: "practice",
                 trial_number: CT+1,
-                question: exp.trial_info.main_trials[CT].question,
-                option1:  exp.trial_info.main_trials[CT].option1,
-                option2:  exp.trial_info.main_trials[CT].option2,
-                option_chosen: $('input[name=answer]:checked').val(),
+                size: exp.trial_info.main_trials[CT].size,
+                condition: exp.trial_info.main_trials[CT].condition,
+                trial: exp.trial_info.main_trials[CT].trial,
+                f: exp.global_data.f,
+                j: exp.global_data.j,
+                keyPressed: keyPressed,
+                correctness: correctness,
                 RT: RT
             };
+
             exp.trial_data.push(trial_data);
-            exp.findNextView();
-        });
-		
-        // record trial starting time
-        startingTime = Date.now();
+        };
 		
     }
 };
