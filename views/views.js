@@ -159,7 +159,7 @@ var beginMainExp = {
 
 var main = {
 	
-	trials : 4,
+	trials : 16,
 	
     render : function(CT) {
 		// fill variables in view-template
@@ -174,10 +174,11 @@ var main = {
         var canvas = createCanvas();
         var startingTime = Date.now();
         var keyPressed, correctness;
+        var filled = CT * (180 / exp.views_seq[exp.currentViewCounter].trials);
 
         canvas.draw(exp.trial_info.main_trials[CT]);
-
-        $('body').on('keyup', handleKeyUp);
+        // update the progress bar
+        $('#filled').css('width', filled);
 
         var handleKeyUp = function(e) {
             if (e.which === 74) {
@@ -197,6 +198,8 @@ var main = {
             }
         };
 
+        $('body').on('keyup', handleKeyUp);
+
         var isCorrect = function(key) {
             var correctness;
 
@@ -214,7 +217,7 @@ var main = {
             var RT = Date.now() - startingTime; // measure RT before anything else
 
             trial_data = {
-                trial_type: "practice",
+                trial_type: "main",
                 trial_number: CT+1,
                 size: exp.trial_info.main_trials[CT].size,
                 condition: exp.trial_info.main_trials[CT].condition,

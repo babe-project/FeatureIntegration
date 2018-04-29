@@ -10,5 +10,8 @@ var practice_trials = [
      condition: 'conjunction'},
     {size: 30,
      trial: 'negative',
-     condition: 'feature'}
+     condition: 'feature'},
+    {size: 30,
+     trial: 'positive',
+     condition: 'conjunction'}
 ];
