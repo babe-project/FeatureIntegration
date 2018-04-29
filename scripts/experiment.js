@@ -4,20 +4,20 @@ exp.customize = function() {
 	// record current date and time in global_data
     this.global_data.startDate = Date();
     this.global_data.startTime = Date.now();
-	
+
     // specify view order
-    this.views_seq = [intro, 
-					 instructions,
-                     practice,
-                     beginMainExp,
-                     main,
-                     postTest,
-                     thanks];
-	
+    this.views_seq = [intro,
+		      instructions,
+                      loop([pauseScreen, practice, feedback], 4),
+                      beginMainExp,
+                      loop([main, feedback], 10),
+                      postTest,
+                      thanks];
+
     // prepare information about trials (procedure)
 	// randomize main trial order, but keep practice trial order fixed
-    // this.trial_info.main_trials = _.shuffle(main_trials);
+
     this.trial_info.main_trials = main_trials;
-	this.trial_info.practice_trials = practice_trials;
-	
+    this.trial_info.practice_trials = practice_trials;
+
 };

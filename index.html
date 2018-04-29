@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		
+
 		<title>browser-based experiments</title>
 
 		<!-- fonts from Google fonts -->
@@ -27,7 +27,7 @@
 		<script src="scripts/canvas.js"></script>
 		<script src="scripts/helpers.js"></script>
 		<script src="scripts/submit_to_server.js"></script>
-		
+
 		<!-- local trial_info files -->
 		<script src="trial_info/main_trials.js"></script>
 		<script src="trial_info/practice_trials.js"></script>
@@ -106,7 +106,15 @@
 			<p>{{ description }}</p>
 			{{/ description }}
 
-			<div class="picture", align = "center">
+                        <div class="countdown" align="center">
+                          <p style="font-size:50px" class="countdown" id="countdown"  align="center">
+                          {{ # countdown }}
+                          {{ countdown }}
+                          {{ / countdown }}
+                          </p>
+                        </div>
+
+			<div class="picture" align="center">
 				<canvas id="canvas" height='400', width='650'></canvas>
 			</div>
 		</div>
@@ -123,6 +131,15 @@
 			<button id="next">Begin Experiment</button>
 		</div>
 		</script>
+
+		<!-- pauseScreen view -->
+		<script id="pauseScreen-view" type="x-tmpl-mustache">
+		<div class="view">
+                        <h1> pause </h1>
+
+		</div>
+		</script>
+
 
 		<!-- main view (buttons response) -->
 		<script id="main-view" type="x-tmpl-mustache">
@@ -144,6 +161,20 @@
 
 		</div>
 		</script>
+
+		<!-- feedback view -->
+		<script id="feedback-view" type="x-tmpl-mustache">
+		<div class="view">
+			{{# RT }}
+                        <h1> Speed: {{ RT }} ms </h1>
+			{{/ RT }}
+                        {{# correctness }}
+                        <h1> your response was {{ correctness }} </h1>
+                        {{/ correctness}}
+
+		</div>
+		</script>
+
 
 		<!-- post test view -->
 		<script id="post-test-view" type="x-tmpl-mustache">
