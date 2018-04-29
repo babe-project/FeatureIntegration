@@ -63,24 +63,65 @@ var instructions = {
     trials: 1
 }
 
+var pauseScreen = {
+    render: function() {
+        var viewTemplate = $('#pauseScreen-view').html();
+        $('#main').html(Mustache.render(viewTemplate, {
+            countdown: 'pause'
+        }));
+        var handleKeyUp = function(e) {
+            if (e.which === 74) {
+                keyPressed = 'j';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 70) {
+                keyPressed = 'f';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 32) {
+                keyPressed = 'space';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else {
+                console.debug('some other key pressed');
+            }
+        };
+
+        $('body').on('keyup', handleKeyUp);
+    }
+}
+
 var practice = {
     "title": "Practice trial",
 
     render: function (CT) {
         var viewTemplate = $("#practice-view").html();
         $('#main').html(Mustache.render(viewTemplate, {
-        title: this.title,
-        description: 'letter S or a blue letter',
-        f: exp.global_data.f,
-        j: exp.global_data.j
+            title: this.title,
+            description: 'letter S or a blue letter',
+            f: exp.global_data.f,
+            j: exp.global_data.j,
+            countdown: ''
         }));
+
+        function displayCountdown(number) {
+            $('#countdown').text(number)
+        }
+
+        displayCountdown(2)
+        setTimeout(function() {displayCountdown(1)}, 1000)
+        setTimeout(function() {displayCountdown('+')}, 2000)
+        setTimeout(function() {displayCountdown('')}, 3000)
 
         // creates the picture
         var canvas = createCanvas();
         var startingTime = Date.now();
         var keyPressed, correctness;
 
-        canvas.draw(exp.trial_info.practice_trials[CT]);
+        setTimeout(function() {
+            canvas.draw(exp.trial_info.practice_trials[CT])
+            $('body').on('keyup', handleKeyUp);
+        }, 3000);
         console.log(exp.trial_info.practice_trials[CT]['trial']);
 
         var handleKeyUp = function(e) {
@@ -101,7 +142,7 @@ var practice = {
             }
         };
 
-        $('body').on('keyup', handleKeyUp);
+
 
         var isCorrect = function(key) {
             var correctness;
@@ -129,7 +170,7 @@ var practice = {
                 j: exp.global_data.j,
                 keyPressed: keyPressed,
                 correctness: correctness,
-                RT: RT
+                RT: RT - 3000 // subtract time before stimulus is shown
             };
 
             exp.trial_data.push(trial_data);
