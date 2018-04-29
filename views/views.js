@@ -7,7 +7,7 @@ var intro = {
     "buttonText": "Begin experiment",
     // render function renders the view
     render: function() {
-        
+
         viewTemplate = $('#intro-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
             title: this.title,
@@ -57,7 +57,7 @@ var instructions = {
                 exp.global_data.j = 'absent';
             }
             exp.findNextView();
-        }); 
+        });
 
     },
     trials: 1
@@ -136,7 +136,7 @@ var practice = {
         };
     },
 
-    trials: 4
+    trials: 1
 };
 
 var beginMainExp = {
@@ -157,10 +157,11 @@ var beginMainExp = {
     trials: 1
 }
 
+
 var main = {
-	
-	trials : 4,
-	
+
+	trials : 1,
+
     render : function(CT) {
 		// fill variables in view-template
         var viewTemplate = $('#main-view').html();
@@ -169,7 +170,7 @@ var main = {
         f: exp.global_data.f,
         j: exp.global_data.j
         }));
-		
+
         // creates the picture
         var canvas = createCanvas();
         var startingTime = Date.now();
@@ -228,9 +229,44 @@ var main = {
 
             exp.trial_data.push(trial_data);
         };
-		
+
     }
 };
+
+
+var feedback = {
+    render: function(CT) {
+        viewTemplate = $('#feedback-view').html();
+        $('#main').html(Mustache.render(viewTemplate, {
+            // get correctness and RT from most recent trial
+            correctness: exp.trial_data[exp.trial_data.length - 1].correctness,
+            RT: exp.trial_data[exp.trial_data.length - 1].RT
+        }));
+
+        var handleKeyUp = function(e) {
+            if (e.which === 74) {
+                keyPressed = 'j';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 70) {
+                keyPressed = 'f';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 32) {
+                keyPressed = 'space';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else {
+                console.debug('some other key pressed');
+            }
+        };
+
+        $('body').on('keyup', handleKeyUp);
+    },
+    trials : 1
+}
+
+
 
 var postTest = {
     "title": "Additional Info",
