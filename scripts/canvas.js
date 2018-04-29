@@ -88,13 +88,14 @@ var createCanvas = function() {
         var context = canvas.getContext('2d');
         var coords = getPositions(trial_info['size'] - 1);
         var target;
-        console.log(coords.length);
 
         if (trial === 'positive') {
             target = createTarget(condition);
         } else {
             target = createNoTarget();
         }
+        console.log('target letter: ' + target.letter);
+        console.log('target color: ' + target.color);
 
         for (var i=0; i<(size - 1); i++) {
             var pos = Math.floor(Math.random() * coords.length);

@@ -67,10 +67,15 @@ var practice = {
     "title": "Practice trial",
 
     render: function (CT) {
+        if (exp.trial_info.practice_trials[CT].condition === 'feature') {
+            var description = 'look for: letter S or a blue letter';
+        } else {
+            var description = 'look for for: green T';
+        }
         var viewTemplate = $("#practice-view").html();
         $('#main').html(Mustache.render(viewTemplate, {
         title: this.title,
-        description: 'letter S or a blue letter',
+        description: description,
         f: exp.global_data.f,
         j: exp.global_data.j
         }));
@@ -162,10 +167,15 @@ var main = {
 	trials : 16,
 	
     render : function(CT) {
+        if (exp.trial_info.main_trials[CT].condition === 'feature') {
+            var description = 'look for: letter S or a blue letter';
+        } else {
+            var description = 'look for for: green T';
+        }
 		// fill variables in view-template
         var viewTemplate = $('#main-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
-        description: 'letter S or a blue letter',
+        description: description,
         f: exp.global_data.f,
         j: exp.global_data.j
         }));

@@ -44,7 +44,6 @@ exp.init = function(){
 // the given number of steps (as defined in 'config_general')
 exp.findNextView = function() {
     var currentView = this.views_seq[this.currentViewCounter];
-    console.log(currentView);
     if (this.currentTrialCounter < currentView.trials) {
         currentView.render(this.currentTrialCounter);
         this.currentTrialCounter ++;
