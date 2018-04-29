@@ -1,5 +1,5 @@
 var main_trials = [
-	{size: 1,
+	{size: 15,
 	 trial: 'positive',
 	 condition: 'conjunction'},
 	{size: 5,

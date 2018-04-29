@@ -1,14 +1,18 @@
 var practice_trials = [
     {size: 15,
      trial: 'positive',
-     condition: 'feature'},
+     condition: 'feature',
+     description: 'blue letter or S'},
     {size: 5,
      trial: 'negative',
-     condition: 'conjunction'},
+     condition: 'conjunction',
+     description: 'blue letter or S'},
     {size: 1,
      trial: 'positive',
-     condition: 'conjunction'},
+     condition: 'conjunction',
+     description: 'blue letter or S'},
     {size: 30,
      trial: 'negative',
-     condition: 'feature'}
+     condition: 'feature',
+     description: 'blue letter or S'}
 ];

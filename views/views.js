@@ -58,10 +58,7 @@ var practice = {
         viewTemplate = $("#practice-view").html();
         $('#main').html(Mustache.render(viewTemplate, {
         title: this.title,
-        question: exp.trial_info.practice_trials[CT].question,
-        option1: exp.trial_info.practice_trials[CT].option1,
-        option2: exp.trial_info.practice_trials[CT].option2,
-        picture: exp.trial_info.practice_trials[CT].picture
+        description: exp.trial_info.practice_trials[CT].description,
         }));
 
         // creates the picture
@@ -78,9 +75,9 @@ var practice = {
             trial_data = {
                 trial_type: "practice",
                 trial_number: CT+1,
-                question: exp.trial_info.practice_trials[CT].question,
-                option1: exp.trial_info.practice_trials[CT].option1,
-                option2: exp.trial_info.practice_trials[CT].option2,
+                size: exp.trial_info.practice_trials.size,
+                condition: exp.trial_info.practice_trials.condition,
+                trial: exp.trial_info.practice_trials.trial,
                 option_chosen: $('input[name=answer]:checked').val(),
                 RT: RT
             };
