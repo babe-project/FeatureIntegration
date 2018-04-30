@@ -15,7 +15,7 @@ exp.customize = function() {
                       thanks];
 
     // prepare information about trials (procedure)
-	// randomize main trial order, but keep practice trial order fixed
+    // randomize main trial order, but keep practice trial order fixed
 
     this.trial_info.main_trials = main_trials;
     this.trial_info.practice_trials = practice_trials;

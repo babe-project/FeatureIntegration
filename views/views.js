@@ -64,6 +64,7 @@ var instructions = {
 }
 
 var pauseScreen = {
+    trials: 1,
     render: function() {
         var viewTemplate = $('#pauseScreen-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
@@ -93,12 +94,12 @@ var pauseScreen = {
 
 var practice = {
     "title": "Practice trial",
-
     render: function (CT) {
-        if (exp.trial_info.practice_trials[CT].condition === 'feature') {
-            var description = 'look for: letter S or a blue letter';
+        var trial_info = generateTrial()
+        if (trial_info.condition === 'feature') {
+            var description = "look for: 'S' or any blue letter";
         } else {
-            var description = 'look for for: green T';
+            var description = "look for: green 'T'";
         }
         var viewTemplate = $("#practice-view").html();
         $('#main').html(Mustache.render(viewTemplate, {
@@ -108,6 +109,9 @@ var practice = {
         j: exp.global_data.j,
         countdown: ''
         }));
+
+        console.log(trial_info['trial']);
+
 
         function displayCountdown(number) {
             $('#countdown').text(number)
@@ -124,10 +128,10 @@ var practice = {
         var keyPressed, correctness;
 
         setTimeout(function() {
-            canvas.draw(exp.trial_info.practice_trials[CT])
+            canvas.draw(trial_info)
             $('body').on('keyup', handleKeyUp);
         }, 3000);
-        console.log(exp.trial_info.practice_trials[CT]['trial']);
+        console.log(trial_info['trial']);
 
         var handleKeyUp = function(e) {
             if (e.which === 74) {
@@ -152,8 +156,8 @@ var practice = {
         var isCorrect = function(key) {
             var correctness;
 
-            if ((exp.trial_info.practice_trials[CT].trial === 'negative' && exp.global_data[key] === 'absent') ||
-                (exp.trial_info.practice_trials[CT].trial === 'positive' && exp.global_data[key] === 'present')) {
+            if ((trial_info.trial === 'negative' && exp.global_data[key] === 'absent') ||
+                (trial_info.trial === 'positive' && exp.global_data[key] === 'present')) {
                 correctness = 'correct';
             } else {
                 correctness = 'incorrect';
@@ -168,9 +172,9 @@ var practice = {
             trial_data = {
                 trial_type: "practice",
                 trial_number: CT+1,
-                size: exp.trial_info.practice_trials[CT].size,
-                condition: exp.trial_info.practice_trials[CT].condition,
-                trial: exp.trial_info.practice_trials[CT].trial,
+                size: trial_info.size,
+                condition: trial_info.condition,
+                trial: trial_info.trial,
                 f: exp.global_data.f,
                 j: exp.global_data.j,
                 keyPressed: keyPressed,
@@ -205,14 +209,15 @@ var beginMainExp = {
 
 
 var main = {
-	trials : 1,
+    trials : 1,
     render : function(CT) {
-        if (exp.trial_info.main_trials[CT].condition === 'feature') {
-            var description = 'look for: letter S or a blue letter';
+        var trial_info = generateTrial()
+        if (trial_info.condition === 'feature') {
+            var description = 'look for: \'S\' or any blue letter';
         } else {
-            var description = 'look for for: green T';
+            var description = 'look for: green \'T\'';
         }
-		// fill variables in view-template
+	// fill variables in view-template
         var viewTemplate = $('#main-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
         description: description,
@@ -220,15 +225,32 @@ var main = {
         j: exp.global_data.j
         }));
 
+
+
+        function displayCountdown(number) {
+            $('#countdown').text(number)
+        }
+
+        displayCountdown(2)
+        setTimeout(function() {displayCountdown(1)}, 1000)
+        setTimeout(function() {displayCountdown('+')}, 2000)
+        setTimeout(function() {displayCountdown('')}, 3000)
+
         // creates the picture
         var canvas = createCanvas();
         var startingTime = Date.now();
         var keyPressed, correctness;
         var filled = CT * (180 / exp.views_seq[exp.currentViewCounter].trials);
 
-        canvas.draw(exp.trial_info.main_trials[CT]);
+
         // update the progress bar
         $('#filled').css('width', filled);
+
+        setTimeout(function() {
+            canvas.draw(trial_info)
+            $('body').on('keyup', handleKeyUp);
+        }, 3000);
+        console.log(trial_info['trial']);
 
         var handleKeyUp = function(e) {
             if (e.which === 74) {
@@ -248,13 +270,11 @@ var main = {
             }
         };
 
-        $('body').on('keyup', handleKeyUp);
-
         var isCorrect = function(key) {
             var correctness;
 
-            if ((exp.trial_info.main_trials[CT].trial === 'negative' && exp.global_data[key] === 'absent') ||
-                (exp.trial_info.main_trials[CT].trial === 'positive' && exp.global_data[key] === 'present')) {
+            if ((trial_info.trial === 'negative' && exp.global_data[key] === 'absent') ||
+                (trial_info.trial === 'positive' && exp.global_data[key] === 'present')) {
                 correctness = 'correct';
             } else {
                 correctness = 'incorrect';
@@ -269,14 +289,14 @@ var main = {
             trial_data = {
                 trial_type: "main",
                 trial_number: CT+1,
-                size: exp.trial_info.main_trials[CT].size,
-                condition: exp.trial_info.main_trials[CT].condition,
-                trial: exp.trial_info.main_trials[CT].trial,
+                size: trial_info.size,
+                condition: trial_info.condition,
+                trial: trial_info.trial,
                 f: exp.global_data.f,
                 j: exp.global_data.j,
                 keyPressed: keyPressed,
                 correctness: correctness,
-                RT: RT
+                RT: RT - 3000 //subtract countdown time
             };
 
             exp.trial_data.push(trial_data);

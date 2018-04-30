@@ -146,7 +146,7 @@
 		<div class="view">
 			<div class="progress-bar-container">
 				<p>progress</p>
-				<div class="progress-bar"><span id='filled'><span></div>
+				<div class="progress-bar"><span id="filled"><span></div>
 			</div>
 			<div class="clearfix"></div>
 
@@ -154,6 +154,15 @@
 			{{# description }}
 			<p>{{ description }}</p>
 			{{/ description }}
+
+                        <div class="countdown" align="center">
+                          <p style="font-size:50px" class="countdown" id="countdown"  align="center">
+                          {{ # countdown }}
+                          {{ countdown }}
+                          {{ / countdown }}
+                          </p>
+                        </div>
+
 
 			<div class="picture", align = "center">
 				<canvas id="canvas" height='400', width='650'></canvas>
