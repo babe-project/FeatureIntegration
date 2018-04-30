@@ -205,7 +205,7 @@ var beginMainExp = {
 
 
 var main = {
-	trials : 16,
+	trials : 1,
     render : function(CT) {
         if (exp.trial_info.main_trials[CT].condition === 'feature') {
             var description = 'look for: letter S or a blue letter';

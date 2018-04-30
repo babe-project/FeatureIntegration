@@ -10,7 +10,7 @@ exp.customize = function() {
 		      instructions,
                       loop([pauseScreen, practice, feedback], 4),
                       beginMainExp,
-                      loop([main, feedback], 10),
+                      loop([pauseScreen, main, feedback], 10),
                       postTest,
                       thanks];
 
