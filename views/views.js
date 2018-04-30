@@ -68,7 +68,6 @@ var pauseScreen = {
     render: function() {
         var viewTemplate = $('#pauseScreen-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
-            countdown: 'pause'
         }));
         var handleKeyUp = function(e) {
             if (e.which === 74) {

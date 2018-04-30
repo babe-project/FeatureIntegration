@@ -103,14 +103,13 @@
 			{{/ title }}
 			<h3>F - {{ f }}, J - {{ j }}</h3>
 			{{# description }}
-			<p>{{ description }}</p>
+			<p align="center">{{ description }}</p>
 			{{/ description }}
 
                         <div class="countdown" align="center">
-                          <p style="font-size:50px" class="countdown" id="countdown"  align="center">
-                          {{ # countdown }}
-                          {{ countdown }}
-                          {{ / countdown }}
+                          <p style="font-size:50px" class="countdown" id="countdown" height="400" width="650"  align="center">
+                            {{ # countdown }} {{ countdown }} {{ /
+                            countdown }}
                           </p>
                         </div>
 
@@ -135,7 +134,8 @@
 		<!-- pauseScreen view -->
 		<script id="pauseScreen-view" type="x-tmpl-mustache">
 		<div class="view">
-                        <h1> pause </h1>
+                  <h1> Get ready </h1>
+                  <p align="center"> press f, j or space to start the next trial </p>
 
 		</div>
 		</script>
@@ -152,19 +152,20 @@
 
 			<h3>F - {{ f }}, J - {{ j }}</h3>
 			{{# description }}
-			<p>{{ description }}</p>
+			<p align="center">{{ description }}</p>
 			{{/ description }}
 
                         <div class="countdown" align="center">
-                          <p style="font-size:50px" class="countdown" id="countdown"  align="center">
-                          {{ # countdown }}
-                          {{ countdown }}
-                          {{ / countdown }}
+                          <p style="font-size:50px" class="countdown" id="countdown" align="center">
+                            {{ # countdown }}
+                            {{ countdown }}
+                            {{ / countdown }}
                           </p>
                         </div>
 
 
-			<div class="picture", align = "center">
+
+			<div class="picture" align="center">
 				<canvas id="canvas" height='400', width='650'></canvas>
 			</div>
 
@@ -173,15 +174,16 @@
 
 		<!-- feedback view -->
 		<script id="feedback-view" type="x-tmpl-mustache">
-		<div class="view">
-			{{# RT }}
-                        <h1> Speed: {{ RT }} ms </h1>
-			{{/ RT }}
-                        {{# correctness }}
-                        <h1> your response was {{ correctness }} </h1>
-                        {{/ correctness}}
+                  <div class="view">
+                      {{# correctness }}
+                      <h1> {{ correctness }}! </h1>
+                      {{/ correctness}}
+                      {{# RT }}
+                      <h2> Speed: {{ RT }}ms </h2>
+		      {{/ RT }}
+                      <p align="center"> press f, j or space to continue </p>
 
-		</div>
+                  </div>
 		</script>
 
 

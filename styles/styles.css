@@ -103,6 +103,16 @@ button:focus {
 canvas {
 }
 
+.countdown {
+
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    top:40%;
+    right: 50%;
+
+}
+
 .question {
 	padding: 30px 0;
 	text-align: center;
@@ -145,7 +155,7 @@ canvas {
 
 /* slider response */
 
-/* slider  ---o--- 
+/* slider  ---o---
 	--- track
 	 o  thumb
 */
@@ -230,7 +240,7 @@ input[type="range"]:focus::-moz-range-thumb {
 	text-align: left;
 }
 
-.post-test-templ form input, 
+.post-test-templ form input,
 .post-test-templ form select {
 	width: 200px;
 	max-width: 200px;
