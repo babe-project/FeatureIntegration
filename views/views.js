@@ -124,11 +124,12 @@ var practice = {
 
         // creates the picture
         var canvas = createCanvas();
-        var startingTime = Date.now();
+        var startingTime;
         var keyPressed, correctness;
 
         setTimeout(function() {
             canvas.draw(trial_info)
+            startingTime = Date.now();
             $('body').on('keyup', handleKeyUp);
         }, 3000);
         console.log(trial_info['trial']);
@@ -179,7 +180,7 @@ var practice = {
                 j: exp.global_data.j,
                 keyPressed: keyPressed,
                 correctness: correctness,
-                RT: RT - 3000 // subtract time before stimulus is shown
+                RT: RT
             };
 
             exp.trial_data.push(trial_data);
@@ -238,16 +239,16 @@ var main = {
 
         // creates the picture
         var canvas = createCanvas();
-        var startingTime = Date.now();
         var keyPressed, correctness;
         var filled = CT * (180 / exp.views_seq[exp.currentViewCounter].trials);
-
+        var startingTime;
 
         // update the progress bar
         $('#filled').css('width', filled);
 
         setTimeout(function() {
             canvas.draw(trial_info)
+            startingTime = Date.now();
             $('body').on('keyup', handleKeyUp);
         }, 3000);
         console.log(trial_info['trial']);
@@ -296,7 +297,7 @@ var main = {
                 j: exp.global_data.j,
                 keyPressed: keyPressed,
                 correctness: correctness,
-                RT: RT - 3000 //subtract countdown time
+                RT: RT
             };
 
             exp.trial_data.push(trial_data);
