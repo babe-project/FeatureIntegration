@@ -108,12 +108,14 @@ button:focus {
 
 @supports not (display: flex) {
 	.countdown-container {
-		position: relative;
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 
 	.countdown {
 		position: absolute;
-		top: calc(50% -40px);
+		top: calc(50% - 40px);
 		left: calc(50% - 50px);
 	}
 }
