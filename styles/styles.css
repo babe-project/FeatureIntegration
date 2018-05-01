@@ -13,17 +13,15 @@ main {
 	min-height: 100%;
 }
 
-.countdown {
-	position: fixed; 
-    	width: 20%;
-    	z-index: 2; 
-    	top: 50%;
-    	left: 50%;
-}
-
 .view {
 	box-sizing: border-box;
 	padding: 50px 0;
+}
+
+.picture{
+	position: relative;
+	width: 650px;
+	margin: 0 auto;
 }
 
 /* titles */
@@ -108,10 +106,45 @@ button:focus {
 	clear: both;
 }
 
-canvas {
+@supports not (display: flex) {
+	.countdown-container {
+		position: relative;
+	}
+
+	.countdown {
+		position: absolute;
+		top: calc(50% -40px);
+		left: calc(50% - 50px);
+	}
+}
+
+.countdown-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	height: 400px;
+	width: 650px;
 }
 
 .countdown {
+	color: #333;
+	font-size: 40px;
+	font-family: "Lato", "Noto Sans", sans-serif;
+	font-weight: bold;
+	line-height: 40px;
+	text-align: center;
+	width: 100px;
+}
+
+canvas {
+	border: 2px solid #333;
+}
+
+/*.countdown {
 
     width: 1px;
     height: 1px;
@@ -119,7 +152,7 @@ canvas {
     top:40%;
     right: 50%;
 
-}
+}*/
 
 .question {
 	padding: 30px 0;

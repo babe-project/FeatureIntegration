@@ -97,7 +97,7 @@
 
 		<!-- Practice trial view -->
 		<script id="practice-view" type="x-tmpl-mustache">
-		<div class="view">
+		<div class="view trial-view">
 			{{# title }}
 			<h1>{{ title }}</h1>
 			{{/ title }}
@@ -106,15 +106,16 @@
 			<p align="center">{{ description }}</p>
 			{{/ description }}
 
-                        <div class="countdown" align="center">
-                          <p style="font-size:50px" class="countdown" id="countdown" height="400" width="650"  align="center">
-                            {{ # countdown }} {{ countdown }} {{ /
-                            countdown }}
-                          </p>
-                        </div>
-
 			<div class="picture" align="center">
-				<canvas id="canvas" height='400', width='650'></canvas>
+				<div class="countdown-container" height='400'width='650'>
+					<p class="countdown" id="countdown">
+					{{ # countdown }}
+						{{ countdown }}
+					{{ / countdown }}
+					</p>
+				</div>
+
+				<canvas id="canvas" height='400' width='650'></canvas>
 			</div>
 		</div>
 		</script>
@@ -134,9 +135,9 @@
 		<!-- pauseScreen view -->
 		<script id="pauseScreen-view" type="x-tmpl-mustache">
 		<div class="view">
-                  <h1> Get ready </h1>
-                  <p align="center"> press F, J or Space to start the
-                  next trial.</p>
+			<h1> Get ready </h1>
+			<h2> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to start the
+			next trial.</h2>
 
 		</div>
 		</script>
@@ -144,7 +145,7 @@
 
 		<!-- main view (buttons response) -->
 		<script id="main-view" type="x-tmpl-mustache">
-		<div class="view">
+		<div class="view trial-view">
 			<div class="progress-bar-container">
 				<p>progress</p>
 				<div class="progress-bar"><span id="filled"><span></div>
@@ -156,18 +157,16 @@
 			<p align="center">{{ description }}</p>
 			{{/ description }}
 
-                        <div class="countdown" align="center">
-                          <p style="font-size:50px" class="countdown" id="countdown" align="center">
-                            {{ # countdown }}
-                            {{ countdown }}
-                            {{ / countdown }}
-                          </p>
-                        </div>
-
-
-
 			<div class="picture" align="center">
-				<canvas id="canvas" height='400', width='650'></canvas>
+				<div class="countdown-container" height='400' width='650'>
+					<p class="countdown" id="countdown">
+					{{ # countdown }}
+						{{ countdown }}
+					{{ / countdown }}
+					</p>
+				</div>
+
+				<canvas id="canvas" height='400' width='650'></canvas>
 			</div>
 
 		</div>
@@ -175,16 +174,16 @@
 
 		<!-- feedback view -->
 		<script id="feedback-view" type="x-tmpl-mustache">
-                  <div class="view">
-                      {{# correctness }}
-                      <h1> {{ correctness }}! </h1>
-                      {{/ correctness}}
-                      {{# RT }}
-                      <h2> Speed: {{ RT }}ms </h2>
-		      {{/ RT }}
-                      <p align="center"> press F, J or Space to continue.</p>
+				  <div class="view">
+					  {{# correctness }}
+					  <h1> {{ correctness }}! </h1>
+					  {{/ correctness}}
+					  {{# RT }}
+					  <h2> Speed: {{ RT }}ms </h2>
+			  {{/ RT }}
+					  <p align="center"> press F, J or Space to continue.</p>
 
-                  </div>
+				  </div>
 		</script>
 
 

@@ -111,7 +111,6 @@ var practice = {
 
         console.log(trial_info['trial']);
 
-
         function displayCountdown(number) {
             $('#countdown').text(number)
         }
@@ -119,7 +118,7 @@ var practice = {
         displayCountdown(2)
         setTimeout(function() {displayCountdown(1)}, 1000)
         setTimeout(function() {displayCountdown('+')}, 2000)
-        setTimeout(function() {displayCountdown('')}, 3000)
+        setTimeout(function() {displayCountdown('')}, 3000);
 
         // creates the picture
         var canvas = createCanvas();
