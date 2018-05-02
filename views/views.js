@@ -238,7 +238,7 @@ var main = {
         // creates the picture
         var canvas = createCanvas();
         var keyPressed, correctness;
-        var filled = CT * (180 / exp.views_seq[exp.currentViewCounter].trials);
+		var filled = exp.currentTrialInViewCounter * (180 / exp.views_seq[exp.currentViewCounter].trials);
         var startingTime;
 
         // update the progress bar
