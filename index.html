@@ -134,8 +134,8 @@
 
 		<!-- pauseScreen view -->
 		<script id="pauseScreen-view" type="x-tmpl-mustache">
-		<div class="view">
-			<h1> Get ready </h1>
+		<div class="view pause-view">
+			<h1>Get ready!</h1>
 			<h2> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to start the
 			next trial.</h2>
 
@@ -174,16 +174,15 @@
 
 		<!-- feedback view -->
 		<script id="feedback-view" type="x-tmpl-mustache">
-				  <div class="view">
-					  {{# correctness }}
-					  <h1> {{ correctness }}! </h1>
-					  {{/ correctness}}
-					  {{# RT }}
-					  <h2> Speed: {{ RT }}ms </h2>
-			  {{/ RT }}
-					  <p align="center"> press F, J or Space to continue.</p>
-
-				  </div>
+		  <div class="view feedback-view">
+			{{# correctness }}
+			<h1> {{ correctness }}! </h1>
+			{{/ correctness}}
+			{{# RT }}
+			<h2> Speed: <strong>{{ RT }}ms</strong> </h2>
+			{{/ RT }}
+			<h2> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to continue.</h2>
+		  </div>
 		</script>
 
 

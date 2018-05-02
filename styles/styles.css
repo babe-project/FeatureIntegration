@@ -16,7 +16,19 @@ main {
 .view {
 	box-sizing: border-box;
 	padding: 50px 0;
+	min-height: 100%;
+	min-height: 100vh;
 }
+
+/* horisontally centered views if the browser supports it */
+@supports (display: flex) {
+	.feedback-view,
+	.pause-view {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+} 
 
 .picture{
 	position: relative;
@@ -145,16 +157,6 @@ button:focus {
 canvas {
 	border: 2px solid #333;
 }
-
-/*.countdown {
-
-    width: 1px;
-    height: 1px;
-    position: absolute;
-    top:40%;
-    right: 50%;
-
-}*/
 
 .question {
 	padding: 30px 0;
