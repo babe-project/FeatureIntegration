@@ -1,1 +1,1 @@
-var practice_trials = generateTrials(4)
+var practice_trials = generateTrials(10)

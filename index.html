@@ -125,7 +125,7 @@
 		<div class="view">
 			{{# text }}
 			<section class="text-container">
-				<p class="text">{{ text }}</p>
+			  <p class="text">{{ text }}</p>
 			</section>
 			{{/ text }}
 			<button id="next">Begin Experiment</button>
@@ -134,10 +134,13 @@
 
 		<!-- pauseScreen view -->
 		<script id="pauseScreen-view" type="x-tmpl-mustache">
-		<div class="view">
-			<h1> Get ready </h1>
-			<h2> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to start the
-			next trial.</h2>
+		  <div class="view">
+                    <h1> Get ready! </h1>
+		    {{# lookfor }}
+		    <p align="center">In the next trial {{ lookfor }}</p>
+		    {{/ lookfor }}
+                    <p align="center"> press F, J or Space to continue.</p>
+
 
 		</div>
 		</script>
