@@ -29,7 +29,7 @@ var instructions = {
      // instruction's title
     "title": "Instructions",
     // instruction's text
-    "text": "On each trial, you will see a question and two response options. Please select the response option you like most. We start with two practice trials.",
+    "text": "This experiment is about searching for letters among other letters. Each trial will start with a 'get ready' screen in which you will be told what to look for in the next screen. Use your keyboard to respond whether the 'target' is present or absent from the screen. The first few trials are practice trials.",
     // instuction's slide proceeding button text
     "buttonText": "Go to practice trial",
     render: function() {
