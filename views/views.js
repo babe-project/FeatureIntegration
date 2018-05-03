@@ -68,9 +68,9 @@ var pauseScreenPractice = {
     render: function(CT) {
         var trial_info = exp.trial_info.practice_trials[CT]
         if (trial_info.condition === 'feature') {
-            var lookfor = "look for: 'S' or any blue letter";
+            var lookfor = "'S' or any blue letter";
         } else {
-            var lookfor = "look for: green 'T'";
+            var lookfor = "green 'T'";
         }
         var viewTemplate = $('#pauseScreen-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
@@ -103,9 +103,9 @@ var practice = {
     render: function (CT) {
         var trial_info = exp.trial_info.practice_trials[CT]
         if (trial_info.condition === 'feature') {
-            var description = "look for: 'S' or any blue letter";
+            var description = "'S' or any blue letter";
         } else {
-            var description = "look for: green 'T'";
+            var description = "green 'T'";
         }
         var viewTemplate = $("#practice-view").html();
         $('#main').html(Mustache.render(viewTemplate, {
@@ -219,9 +219,9 @@ var pauseScreenMain = {
     render: function(CT) {
         var trial_info = exp.trial_info.main_trials[CT]
         if (trial_info.condition === 'feature') {
-            var lookfor = "look for: 'S' or any blue letter";
+            var lookfor = "'S' or any blue letter";
         } else {
-            var lookfor = "look for: green 'T'";
+            var lookfor = "green 'T'";
         }
         var viewTemplate = $('#pauseScreen-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
@@ -255,9 +255,9 @@ var main = {
     render : function(CT) {
         var trial_info = generateTrial()
         if (trial_info.condition === 'feature') {
-            var description = 'look for: \'S\' or any blue letter';
+            var description = "'S' or any blue letter";
         } else {
-            var description = 'look for: green \'T\'';
+            var description = "green 'T'";
         }
 	// fill variables in view-template
         var viewTemplate = $('#main-view').html();

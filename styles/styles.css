@@ -20,6 +20,22 @@ main {
 	min-height: 100vh;
 }
 
+.feedback-view p,
+.pause-view p {
+	text-align: center;
+}
+
+.pause-view .lookfor {
+	font-weight: bold;
+	font-size: 24px;
+	display: block;
+	padding: 5px;
+}
+
+.feedback-view h1 {
+	color: #5187BA;
+}
+
 /* horisontally centered views if the browser supports it */
 @supports (display: flex) {
 	.feedback-view,

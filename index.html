@@ -102,8 +102,8 @@
 			<h1>{{ title }}</h1>
 			{{/ title }}
 
-						{{# description }}
-			<p align="center">{{ description }}</p>
+			{{# description }}
+			<h2>{{ description }}</h2>
 			{{/ description }}
 
 			<h3>press F for {{ f }}, J for {{ j }}</h3>
@@ -139,9 +139,9 @@
 		<div class="view pause-view">
 			<h1> Get ready </h1>
 			{{# lookfor }}
-			<h2>In the next trial {{ lookfor }}</h2>
+			<p>In the next trial look for: <strong  class="lookfor">{{ lookfor }}</strong></p>
 			{{/ lookfor }}
-			<h3>press F, J or Space to start.</h3>
+			<p>press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to start.</p>
 		</div>
 		</script>
 
@@ -154,10 +154,10 @@
 				<div class="progress-bar"><span id="filled"><span></div>
 			</div>
 			<div class="clearfix"></div>
-					{{# description }}
-			<p align="center">{{ description }}</p>
+			{{# description }}
+			<h2>{{ description }}</h2>
 			{{/ description }}
-			<h3>F - {{ f }}, J - {{ j }}</h3>
+			<h3>press F for {{ f }}, J for {{ j }}</h3>
 
 
 			<div class="picture" align="center">
@@ -179,12 +179,12 @@
 		<script id="feedback-view" type="x-tmpl-mustache">
 		  <div class="view feedback-view">
 			{{# correctness }}
-			<h1> {{ correctness }}! </h1>
+			<h1>{{ correctness }}!</h1>
 			{{/ correctness}}
 			{{# RT }}
-			<h2> Speed: <strong>{{ RT }}ms</strong> </h2>
+			<h2>Speed: <strong>{{ RT }}ms</strong> </h2>
 			{{/ RT }}
-			<h2> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to continue.</h2>
+			<p> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to continue.</p>
 		  </div>
 		</script>
 
