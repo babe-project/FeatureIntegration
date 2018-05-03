@@ -29,7 +29,7 @@ var instructions = {
      // instruction's title
     "title": "Instructions",
     // instruction's text
-    "text": "Each trial will start with a 'get ready' screen in which you will be told what to look for in the next screen. Use your keyboard to respond whether the 'target' is present or absent from the screen. Try to respond as fast as you can while remaining accurate. The first few trials are practice trials.",
+    "text": "Each trial will start with a 'get ready' screen in which you will be told what to look for in the next screen. Use your keyboard to respond whether the 'target' is present or absent from the screen. Place your left index finger on the F key and your left index finger on the J key. Try to respond as fast as you can while remaining accurate. The first few trials are practice trials.",
     // instuction's slide proceeding button text
     "buttonText": "Go to practice trial",
     render: function() {
