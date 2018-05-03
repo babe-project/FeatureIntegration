@@ -7,7 +7,7 @@ exp.customize = function() {
 
     // specify view order
     this.views_seq = [intro,
-		      instructions,
+                      instructions,
                       loop([pauseScreenPractice, practice, feedback], 2),
                       beginMainExp,
                       loop([pauseScreenMain, main, feedback], 10),

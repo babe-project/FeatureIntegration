@@ -38,6 +38,8 @@ exp.init = function(){
     this.currentTrialCounter = 0;
 	this.currentTrialInViewCounter = 0;
     this.currentView = this.findNextView();
+    this.currentMainTrial = 0;
+    console.log(this.currentMainTrial);
 	
 	// user does not (should not) change the following information
 	// checks the config _deploy.deployMethod is MTurk or MTurkSandbox,
@@ -55,7 +57,7 @@ exp.init = function(){
 	console.log("live experiment: " + config_deploy.liveExperiment);
 	console.log("runs on MTurk: " + config_deploy.is_MTurk);
 	console.log("MTurk server: " + config_deploy.MTurk_server);
-}
+};
 
 
 
@@ -65,11 +67,12 @@ exp.init = function(){
 exp.findNextView = function() {
     var currentView = this.views_seq[this.currentViewCounter];
     if (this.currentTrialInViewCounter < currentView.trials) {
-        currentView.render(currentView.CT);
+        currentView.render(currentView);
     } else {
-		this.currentViewCounter ++;
+        this.currentViewCounter ++;
         currentView = this.views_seq[this.currentViewCounter];
         this.currentTrialInViewCounter = 0;
+        this.currentMainTrial = currentView.CT;
         currentView.render(currentView.CT);
     }
 	// increment counter for how many trials we have seen of THIS view during THIS occurrence of it
@@ -271,9 +274,10 @@ var prepareDataFromCSV = function(practiceTrialsFile, trialsFile) {
 
 // functions to expand 'loop' statements `from views_seq`
 var loop = function(arr, count, shuffleFlag) {
-	return _.flatMapDeep(_.range(count), function(i) {return arr})
-}
+    return _.flatMapDeep(_.range(count), function(i) {
+        return arr})
+};
+
 var loopShuffled = function(arr, count) {
-	return _.flatMapDeep(_.range(count), function(i) {return _.shuffle(arr)})		
-	
-}
+	return _.flatMapDeep(_.range(count), function(i) {return _.shuffle(arr)})
+};

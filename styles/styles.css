@@ -26,14 +26,26 @@ main {
 }
 
 .pause-view .lookfor {
+	border: 2px dotted #5187BA;
 	font-weight: bold;
 	font-size: 24px;
 	display: block;
-	padding: 5px;
+	margin: 5px 0;
+	padding: 10px;
 }
 
 .feedback-view h1 {
 	color: #5187BA;
+}
+
+.trial-view .description {
+/*	border: 2px dotted #5187BA;
+	display: block;
+	padding: 8px;
+	margin: 5px auto;
+	width: auto;*/
+
+	text-align: center;
 }
 
 /* horisontally centered views if the browser supports it */

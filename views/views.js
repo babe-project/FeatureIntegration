@@ -253,7 +253,8 @@ var pauseScreenMain = {
 var main = {
     trials : 1,
     render : function(CT) {
-        var trial_info = generateTrial()
+        var viewName = 'main';
+        var trial_info = generateTrial();
         if (trial_info.condition === 'feature') {
             var description = "'S' or any blue letter";
         } else {
@@ -267,8 +268,6 @@ var main = {
         j: exp.global_data.j
         }));
 
-
-
         function displayCountdown(number) {
             $('#countdown').text(number)
         }
@@ -281,7 +280,7 @@ var main = {
         // creates the picture
         var canvas = createCanvas();
         var keyPressed, correctness;
-		var filled = exp.currentTrialInViewCounter * (180 / exp.views_seq[exp.currentViewCounter].trials);
+		var filled = exp.currentMainTrial * (180 / main_trial_count);
         var startingTime;
 
         // update the progress bar

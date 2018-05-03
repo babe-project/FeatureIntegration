@@ -9,7 +9,7 @@ var shuffleComb = function(comb) {
 function generateTrial() {
     var size = _.sample([1, 5, 15, 30]);
     var trial = _.sample(['positive', 'negative']);
-    var condition = _.sample(['conjunction', 'feature'])
+    var condition = _.sample(['conjunction', 'feature']);
     return {size: size, trial: trial, condition: condition};
 };
 
@@ -19,5 +19,5 @@ function generateTrials(n) {
     for (var i = 0; i < n; i++) {
         trials.push(generateTrial());
     }
-    return trials
+    return trials;
 };
