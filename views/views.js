@@ -2,7 +2,7 @@ var intro = {
     // introduction title
     "title": "Welcome!",
     // introduction text
-    "text": "Thank you for participating in our study. In this study, you will see pictures and click on buttons.",
+    "text": "Thank you for participating in our study. In this study you will look for letters among other letters. You will respond using the keyboard.",
     // introduction's slide proceeding button text
     "buttonText": "Begin experiment",
     // render function renders the view
@@ -29,7 +29,7 @@ var instructions = {
      // instruction's title
     "title": "Instructions",
     // instruction's text
-    "text": "On each trial, you will see a question and two response options. Please select the response option you like most. We start with two practice trials.",
+    "text": "Each trial will start with a 'get ready' screen in which you will be told what to look for in the next screen. Use your keyboard to respond whether the 'target' is present or absent from the screen. Place your left index finger on the F key and your left index finger on the J key. Try to respond as fast as you can while remaining accurate. The first few trials are practice trials.",
     // instuction's slide proceeding button text
     "buttonText": "Go to practice trial",
     render: function() {
@@ -63,11 +63,18 @@ var instructions = {
     trials: 1
 }
 
-var pauseScreen = {
+var pauseScreenPractice = {
     trials: 1,
-    render: function() {
+    render: function(CT) {
+        var trial_info = exp.trial_info.practice_trials[CT]
+        if (trial_info.condition === 'feature') {
+            var lookfor = "look for: 'S' or any blue letter";
+        } else {
+            var lookfor = "look for: green 'T'";
+        }
         var viewTemplate = $('#pauseScreen-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
+            lookfor: lookfor
         }));
         var handleKeyUp = function(e) {
             if (e.which === 74) {
@@ -94,7 +101,7 @@ var pauseScreen = {
 var practice = {
     "title": "Practice trial",
     render: function (CT) {
-        var trial_info = generateTrial()
+        var trial_info = exp.trial_info.practice_trials[CT]
         if (trial_info.condition === 'feature') {
             var description = "look for: 'S' or any blue letter";
         } else {
@@ -204,6 +211,42 @@ var beginMainExp = {
 
     },
     trials: 1
+}
+
+
+var pauseScreenMain = {
+    trials: 1,
+    render: function(CT) {
+        var trial_info = exp.trial_info.main_trials[CT]
+        if (trial_info.condition === 'feature') {
+            var lookfor = "look for: 'S' or any blue letter";
+        } else {
+            var lookfor = "look for: green 'T'";
+        }
+        var viewTemplate = $('#pauseScreen-view').html();
+        $('#main').html(Mustache.render(viewTemplate, {
+            lookfor: lookfor
+        }));
+        var handleKeyUp = function(e) {
+            if (e.which === 74) {
+                keyPressed = 'j';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 70) {
+                keyPressed = 'f';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 32) {
+                keyPressed = 'space';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else {
+                console.debug('some other key pressed');
+            }
+        };
+
+        $('body').on('keyup', handleKeyUp);
+    }
 }
 
 
