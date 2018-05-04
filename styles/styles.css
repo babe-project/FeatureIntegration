@@ -35,7 +35,8 @@ main {
 }
 
 .feedback-view h1 {
-	color: #5187BA;
+    color: #5187BA;
+    align: center;
 }
 
 .trial-view .description {
@@ -50,7 +51,6 @@ main {
 
 /* horisontally centered views if the browser supports it */
 @supports (display: flex) {
-	.feedback-view,
 	.pause-view {
 		display: flex;
 		flex-direction: column;

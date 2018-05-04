@@ -1,10 +1,3 @@
-// insert any functions that are useful throughout the experiment here
-var shuffleComb = function(comb) {
-    // while this one is trivial, this just to show that we CAN define a function here
-    return _.shuffle(comb);
-};
-
-
 // trial generation
 function generateTrial() {
     var size = _.sample([1, 5, 15, 30]);
@@ -21,3 +14,21 @@ function generateTrials(n) {
     }
     return trials;
 };
+
+// produces one complete set of all 16 conditions
+function enumerateTrials() {
+	var sizeList = [1, 5, 15, 30];
+    var trialList = ['positive', 'negative'];
+    var conditionList = ['conjunction', 'feature'];
+	var trials = [];
+	for (var i = 0; i < sizeList.length; i++) {
+		for (var j = 0; j < trialList.length; j++) {
+			for (var k = 0; k < conditionList.length; k++) {
+				trials.push({size: sizeList[i],
+							trial: trialList[j],
+							condition: conditionList[k]});
+			}
+		}	
+	}
+	return trials;
+}

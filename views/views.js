@@ -29,9 +29,9 @@ var instructions = {
      // instruction's title
     "title": "Instructions",
     // instruction's text
-    "text": "Each trial will start with a 'get ready' screen in which you will be told what to look for in the next screen. Use your keyboard to respond whether the 'target' is present or absent from the screen. Place your left index finger on the F key and your left index finger on the J key. Try to respond as fast as you can while remaining accurate. The first few trials are practice trials.",
+    "text": "Each trial will start with a <b>'get ready' screen</b> in which you will be told what to look for on the next screen, the so-called <b>target</b>. You will then proceed to the <b>image screen</b> where you see a picture, containing colored letters. The target is either a green T, the letter S (no matter what its color is) or any letter (no matter which) of color blue. There is either exactly one target on the image screen, or there is no target. Your task is to <b>report as quickly and accurately as possible whether the target is on the screen or not</b>. <p> Use your keyboard to respond whether the target is present or absent from the screen. Place your left index finger on the F key and your right index finger on the J key. You will <b>respond to a present stimulus with the key (F or J) that corresponds to your dominant hand</b>. <p> Try to respond as fast as you can while remaining accurate. The first few trials are <b>practice trials</b>. You will receive <b>feedback</b> after each trial, telling you how fast you were and whether your answer was correct. Please <b>stay focused</b> during the whole experiment. You can take breaks for as long as you like while on the 'get ready' screen.",
     // instuction's slide proceeding button text
-    "buttonText": "Go to practice trial",
+    "buttonText": "Go to practice session",
     render: function() {
 
         viewTemplate = $("#instructions-view").html();
@@ -74,7 +74,9 @@ var pauseScreenPractice = {
         }
         var viewTemplate = $('#pauseScreen-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
-            lookfor: lookfor
+            lookfor: lookfor,
+			f: exp.global_data.f,
+        	j: exp.global_data.j
         }));
         var handleKeyUp = function(e) {
             if (e.which === 74) {
@@ -189,6 +191,7 @@ var practice = {
             };
 
             exp.trial_data.push(trial_data);
+			exp.practice_progress ++;
         };
     },
 
@@ -225,7 +228,9 @@ var pauseScreenMain = {
         }
         var viewTemplate = $('#pauseScreen-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
-            lookfor: lookfor
+            lookfor: lookfor,
+			f: exp.global_data.f,
+        	j: exp.global_data.j
         }));
         var handleKeyUp = function(e) {
             if (e.which === 74) {
@@ -254,7 +259,7 @@ var main = {
     trials : 1,
     render : function(CT) {
         var viewName = 'main';
-        var trial_info = generateTrial();
+        var trial_info = exp.trial_info.main_trials[CT];
         if (trial_info.condition === 'feature') {
             var description = "'S' or any blue letter";
         } else {
@@ -280,7 +285,7 @@ var main = {
         // creates the picture
         var canvas = createCanvas();
         var keyPressed, correctness;
-		var filled = exp.currentMainTrial * (180 / main_trial_count);
+		var filled = exp.currentMainTrial * (180 / exp.main_trial_count);
         var startingTime;
 
         // update the progress bar
@@ -341,21 +346,26 @@ var main = {
             };
 
             exp.trial_data.push(trial_data);
+			exp.main_progress ++;
         };
 
     }
 };
 
 
-var feedback = {
+var feedbackPractice = {
     render: function(CT) {
-        viewTemplate = $('#feedback-view').html();
+        viewTemplate = $('#feedbackPractice-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
             // get correctness and RT from most recent trial
             correctness: exp.trial_data[exp.trial_data.length - 1].correctness,
             RT: exp.trial_data[exp.trial_data.length - 1].RT
         }));
 
+		// update the progress bar
+		var filled = exp.practice_progress * (180 / exp.practice_trial_count);
+        $('#filled').css('width', filled);
+		
         var handleKeyUp = function(e) {
             if (e.which === 74) {
                 keyPressed = 'j';
@@ -379,11 +389,45 @@ var feedback = {
     trials : 1
 }
 
+var feedbackMain = {
+    render: function(CT) {
+        viewTemplate = $('#feedbackPractice-view').html();
+        $('#main').html(Mustache.render(viewTemplate, {
+            // get correctness and RT from most recent trial
+            correctness: exp.trial_data[exp.trial_data.length - 1].correctness,
+            RT: exp.trial_data[exp.trial_data.length - 1].RT
+        }));
 
+		// update the progress bar
+		var filled = exp.main_progress * (180 / exp.main_trial_count);
+        $('#filled').css('width', filled);
+		
+        var handleKeyUp = function(e) {
+            if (e.which === 74) {
+                keyPressed = 'j';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 70) {
+                keyPressed = 'f';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else if (e.which === 32) {
+                keyPressed = 'space';
+                $('body').off('keyup', handleKeyUp);
+                exp.findNextView();
+            } else {
+                console.debug('some other key pressed');
+            }
+        };
+
+        $('body').on('keyup', handleKeyUp);
+    },
+    trials : 1
+}
 
 var postTest = {
     "title": "Additional Info",
-    "text": "Answering the following questions is optional, but will help us understand your answers.",
+    "text": "Please fill in the following information. Leaving a comment is optional.",
     "buttonText": "Continue",
     render : function() {
 
@@ -399,10 +443,8 @@ var postTest = {
             e.preventDefault();
 
             // records the post test info
-            exp.global_data.age = $('#age').val();
-            exp.global_data.gender = $('#gender').val();
             exp.global_data.education = $('#education').val();
-            exp.global_data.languages = $('#languages').val();
+            exp.global_data.languages = $('#studentID').val();
             exp.global_data.comments = $('#comments').val().trim();
             exp.global_data.endTime = Date.now();
             exp.global_data.timeSpent = (exp.global_data.endTime - exp.global_data.startTime) / 60000;

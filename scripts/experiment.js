@@ -8,16 +8,27 @@ exp.customize = function() {
     // specify view order
     this.views_seq = [intro,
                       instructions,
-                      loop([pauseScreenPractice, practice, feedback], 2),
+                      loop([pauseScreenPractice, practice, feedbackPractice], 2),
                       beginMainExp,
-                      loop([pauseScreenMain, main, feedback], 10),
+                      loop([pauseScreenMain, main, feedbackMain], 2),
                       postTest,
                       thanks];
 
     // prepare information about trials (procedure)
     // randomize main trial order, but keep practice trial order fixed
 
-    this.trial_info.main_trials = main_trials;
-    this.trial_info.practice_trials = practice_trials;
+	// enumerateTrials() gives a random shuffle of all 16 possible conditions
+	// make sure that these are enough for the number of trials implied by views_seq;
+	// otherwise the experiment will crash with an error!
+    this.trial_info.main_trials = _.shuffle(enumerateTrials()); 
+    this.trial_info.practice_trials = _.shuffle(enumerateTrials());
+	
+	// manually specify how many trials (of each type) there are;
+	// this is important for the progress bar
+	this.main_trial_count = 2
+	this.practice_trial_count = 2
+	// counter for the progress bars
+	this.main_progress = 0
+	this.practice_progress = 0
 
 };

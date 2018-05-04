@@ -78,7 +78,7 @@
 			{{/ title }}
 			{{# text }}
 			<section class="text-container">
-				<p class="text">{{ text }}</p>
+				<p class="text">{{{ text }}}</p>
 			</section>
 			{{/ text }}
 			<p>
@@ -101,12 +101,6 @@
 			{{# title }}
 			<h1>{{ title }}</h1>
 			{{/ title }}
-
-			{{# description }}
-			<p class="description">{{ description }}</p>
-			{{/ description }}
-
-			<h3>press F for {{ f }}, J for {{ j }}</h3>
 
 			<div class="picture" align="center">
 				<div class="countdown-container" height='400'width='650'>
@@ -141,7 +135,13 @@
 			{{# lookfor }}
 			<p>In the next trial look for: <strong  class="lookfor">{{ lookfor }}</strong></p>
 			{{/ lookfor }}
-			<p>press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to start.</p>
+			
+			<section class="text-container">
+			  <p class="text">Remember to press F for {{ f }} and J for {{ j }}</p>
+			</section>
+			
+			<p>Press <strong>Space</strong> to continue.</p>
+			
 		</div>
 		</script>
 
@@ -149,17 +149,7 @@
 		<!-- main view (buttons response) -->
 		<script id="main-view" type="x-tmpl-mustache">
 		<div class="view trial-view">
-			<div class="progress-bar-container">
-				<p>progress</p>
-				<div class="progress-bar"><span id="filled"><span></div>
-			</div>
 			<div class="clearfix"></div>
-			{{# description }}
-			<p class="description">{{ description }}</p>
-			{{/ description }}
-			<h3>press F for {{ f }}, J for {{ j }}</h3>
-
-
 			<div class="picture" align="center">
 				<div class="countdown-container" height='400' width='650'>
 					<p class="countdown" id="countdown">
@@ -175,11 +165,15 @@
 		</div>
 		</script>
 
-		<!-- feedback view -->
-		<script id="feedback-view" type="x-tmpl-mustache">
+		<!-- feedback view for practice trials -->
+		<script id="feedbackPractice-view" type="x-tmpl-mustache">
 		  <div class="view feedback-view">
+		  	<div class="progress-bar-container">
+				<p>progress	<div class="progress-bar"><span id="filled"><span></div>
+				</p>
+			</div>
 			{{# correctness }}
-			<h1>{{ correctness }}!</h1>
+			<h1> That was {{ correctness }}!</h1>
 			{{/ correctness}}
 			{{# RT }}
 			<h2>Speed: <strong>{{ RT }}ms</strong> </h2>
@@ -189,6 +183,23 @@
 		</script>
 
 
+		<!-- feedback view for main trials-->
+		<script id="feedbackMain-view" type="x-tmpl-mustache">
+		  <div class="view feedback-view">
+		  	<div class="progress-bar-container">
+			<p>progress <div class="progress-bar"><span id="filled"><span></div>
+			</p>
+			</div>
+			{{# correctness }}
+			<h1>{{ correctness }}!</h1>
+			{{/ correctness}}
+			{{# RT }}
+			<h2>Speed: <strong>{{ RT }}ms</strong> </h2>
+			{{/ RT }}
+			<p> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to continue.</p>
+		  </div>
+		</script>
+		
 		<!-- post test view -->
 		<script id="post-test-view" type="x-tmpl-mustache">
 		<div class="view post-test-templ">
@@ -202,30 +213,18 @@
 			{{/ text }}
 			<form>
 				<p>
-					<label for="age">Age:</label>
-					<input type="number" name="age" min="18" max="110" id="age" />
-				</p>
-				<p>
-					<label for="gender">Gender:</label>
-					<select id="gender" name="gender">
+					<label for="education">Status:</label>
+					<select id="education" name="education">
 						<option></option>
-						<option value="male">male</option>
-						<option value="female">female</option>
+						<option value="MSc">MSc CogSci program</option>
+						<option value="BSc">BSc CogSci program</option>
+						<option value="school">visiting from shool</option>
 						<option value="other">other</option>
 					</select>
 				</p>
 				<p>
-					<label for="education">Level of Education:</label>
-					<select id="education" name="education">
-						<option></option>
-						<option value="graduated_high_school">Graduated High School</option>
-						<option value="graduated_college">Graduated College</option>
-						<option value="higher_degree">Higher Degree</option>
-					</select>
-				</p>
-				<p>
-					<label for="languages" name="languages">Native Languages: <br /><span>(i.e. the language(s) spoken at home when you were a child)</</span></label>
-					<input type="text" id="languages"/>
+					<label for="studentID" name="studentID">Student ID: <br /><span>(if applicable)</</span></label>
+					<input type="text" id="studentID"/>
 				</p>
 				<p class="comment-sect">
 					<label for="comments">Further comments</label>
