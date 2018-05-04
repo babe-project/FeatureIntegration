@@ -32,3 +32,12 @@ function enumerateTrials() {
 	}
 	return trials;
 }
+
+
+function sumArray(inputArray) {
+	var sum = 0;
+	for (var i = 0; i < inputArray.length; i++) {
+		sum = sum + inputArray[i];
+	}
+	return sum;
+}

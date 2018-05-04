@@ -176,7 +176,7 @@
 			<h1> That was {{ correctness }}!</h1>
 			{{/ correctness}}
 			{{# RT }}
-			<h2>Speed: <strong>{{ RT }}ms</strong> </h2>
+			<h2>Reaction time: <strong>{{ RT }}ms</strong> </h2>
 			{{/ RT }}
 			<p> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to continue.</p>
 		  </div>
@@ -191,12 +191,16 @@
 			</p>
 			</div>
 			{{# correctness }}
-			<h1>{{ correctness }}!</h1>
+			<h1>That was {{ correctness }}!</h1>
 			{{/ correctness}}
 			{{# RT }}
-			<h2>Speed: <strong>{{ RT }}ms</strong> </h2>
+			<h2>Reaction time: <strong>{{ RT }}ms</strong> </h2>
 			{{/ RT }}
-			<p> press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to continue.</p>
+			
+			<p>Your current percentage of correct answers is {{averageCorrect}}%.</p>
+			<p>Your average reaction time is {{averageRT}}ms.</p>
+			
+			<p> Press <strong>F</strong>, <strong>J</strong> or <strong>Space</strong> to continue.</p>
 		  </div>
 		</script>
 		

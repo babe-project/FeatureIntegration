@@ -391,13 +391,20 @@ var feedbackPractice = {
 
 var feedbackMain = {
     render: function(CT) {
-        viewTemplate = $('#feedbackPractice-view').html();
+		var averageRT = sumArray(_.map(exp.trial_data, function(t) {return t.RT }))/exp.trial_data.length
+		var averageCorrect = sumArray(_.map(exp.trial_data, function(t) {return t.correctness == 'correct' ? 1: 0 }))/exp.trial_data.length * 100
+		
+		
+        viewTemplate = $('#feedbackMain-view').html();
         $('#main').html(Mustache.render(viewTemplate, {
             // get correctness and RT from most recent trial
             correctness: exp.trial_data[exp.trial_data.length - 1].correctness,
-            RT: exp.trial_data[exp.trial_data.length - 1].RT
+            RT: exp.trial_data[exp.trial_data.length - 1].RT,
+			averageRT: _.round(averageRT,2),
+			averageCorrect: _.round(averageCorrect)
         }));
 
+		
 		// update the progress bar
 		var filled = exp.main_progress * (180 / exp.main_trial_count);
         $('#filled').css('width', filled);
