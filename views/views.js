@@ -286,26 +286,27 @@ var main = {
         var canvas = createCanvas();
         var keyPressed, correctness;
 		var filled = exp.currentMainTrial * (180 / exp.main_trial_count);
-        var startingTime;
+        var startingTime, RT;
 
         // update the progress bar
         $('#filled').css('width', filled);
 
         setTimeout(function() {
             canvas.draw(trial_info)
-            startingTime = Date.now();
+            startingTime = Date.now(); // set timer to record RT
             $('body').on('keyup', handleKeyUp);
         }, 3000);
-        console.log(trial_info['trial']);
 
         var handleKeyUp = function(e) {
             if (e.which === 74) {
+				RT = Date.now() - startingTime; // measure RT before anything else
                 keyPressed = 'j';
                 correctness = isCorrect('j');
                 recordData();
                 $('body').off('keyup', handleKeyUp);
                 exp.findNextView();
             } else if (e.which === 70) {
+				RT = Date.now() - startingTime; // measure RT before anything else
                 keyPressed = 'f';
                 correctness = isCorrect('f');
                 recordData();
@@ -330,7 +331,6 @@ var main = {
         };
 
         var recordData = function() {
-            var RT = Date.now() - startingTime; // measure RT before anything else
 
             trial_data = {
                 trial_type: "main",
