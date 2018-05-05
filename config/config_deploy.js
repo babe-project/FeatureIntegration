@@ -5,7 +5,7 @@ var config_deploy = {
     // needed to recover data from server app
     "author": "MF",
     // needed to recover data from server app
-    "experiment_id": "FeatureIntegrationTMP", 
+    "experiment_id": "FeatureIntegrationICNP18", 
     "description": "Treisman & Gelade (1980) Exp 1",
 
     // set deployment method; use one of:
