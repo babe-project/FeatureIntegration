@@ -10,7 +10,7 @@ exp.customize = function() {
                       instructions,
 //                      loop([pauseScreenPractice, practice, feedbackPractice], 2),
 //                      beginMainExp,
-                      loop([pauseScreenMain, main, feedbackMain], 6),
+                      loop([pauseScreenMain, main, feedbackMain], 2),
                       postTest,
                       thanks];
 
@@ -26,7 +26,7 @@ exp.customize = function() {
 	// manually specify how many trials (of each type) there are;
 	// this is important for the progress bar
 	this.practice_trial_count = 2
-	this.main_trial_count = 6
+	this.main_trial_count = 2
 	// counter for the progress bars
 	this.main_progress = 0
 	this.practice_progress = 0
